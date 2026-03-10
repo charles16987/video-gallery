@@ -65,10 +65,10 @@ background:#000;
 .ratio-16-9{aspect-ratio:16/9;}
 .ratio-9-16{aspect-ratio:9/16;}
 
-.video-card video{
+.thumbnail-wrapper iframe{
 width:100%;
 height:100%;
-object-fit:cover;
+border:0;
 }
 
 .play-overlay{
@@ -176,7 +176,7 @@ Vertical
 </div>
 
 <div class="modal-body p-0">
-<video id="modalVideo" controls style="width:100%"></video>
+<iframe id="modalVideo" width="100%" height="450" allow="autoplay"></iframe>
 </div>
 
 </div>
@@ -188,47 +188,55 @@ Vertical
 <script>
 
 const videos=[
+
 {
 id:1,
 title:"Real Estate",
 type:"horizontal",
-url:"video/Horizontal-1.mp4",
+url:"https://drive.google.com/file/d/1bg1jHk-kVR98XpsEnc6if3aFl4xW8x0A/preview",
 meta:"4K"
 },
+
 {
 id:2,
 title:"Real Estate",
 type:"horizontal",
-url:"video/Horizontal-2.mp4",
+url:"https://drive.google.com/file/d/1meb8ayZIqYU3sRpua0a41sP2DL1Q7CHH/preview",
 meta:"4K"
 },
+
 {
 id:3,
 title:"Real Estate",
 type:"horizontal",
-url:"video/Horizontal-3.mp4",
+url:"https://drive.google.com/file/d/1XXpF6Yr9a49Pp0v-65V4NyV1K9n5ZvQA/preview",
 meta:"4K"
 },
+
 {
 id:4,
 title:"Real Estate",
 type:"vertical",
-url:"video/vertical-1.mp4",
+url:"https://drive.google.com/file/d/1WkMrmPzvO8a-CfbxUATfeE6Mq83yhAd1/preview",
 meta:"Portrait"
 },
+
 {
 id:5,
 title:"Real Estate",
 type:"vertical",
-url:"video/vertical-2.mp4",
+url:"https://drive.google.com/file/d/1mvTp3dFPF7fQGy8VNe4wJFEIPaEL_xUM/preview",
 meta:"Portrait"
-},{
+},
+
+{
 id:6,
 title:"Real Estate",
 type:"vertical",
-url:"video/vertical-3.mp4",
+url:"https://drive.google.com/file/d/1mvTp3dFPF7fQGy8VNe4wJFEIPaEL_xUM/preview",
 meta:"Portrait"
 }
+
 ];
 
 const horizontalGrid=document.getElementById("horizontalGrid");
@@ -254,13 +262,7 @@ col.innerHTML=`
 
 <div class="thumbnail-wrapper ${isVertical?'ratio-9-16':'ratio-16-9'}">
 
-<video muted loop preload="metadata"
-onmouseover="this.play()"
-onmouseout="this.pause();this.currentTime=0;">
-
-<source src="${video.url}" type="video/mp4">
-
-</video>
+<iframe src="${video.url}?autoplay=0&mute=1"></iframe>
 
 <div class="play-overlay">
 <div class="play-icon">▶</div>
@@ -298,7 +300,7 @@ const video=videos.find(v=>v.id===id);
 
 modalTitle.innerText=video.title;
 
-modalVideo.src=video.url;
+modalVideo.src=video.url+"?autoplay=1";
 
 videoModal.show();
 
